@@ -89,6 +89,16 @@ Creates the object representing a content
 */
 function getEnlacesContenido(doc,path){
     lista = doc.getElementById("content_listContainer");
+    if(lista == null){
+       var menu = doc.getElementById("courseMenuPalette_contents").children;
+       var enla;
+       for(var i =0 ; i<menu.length;i++){
+  
+          if(menu[i].children[0].children[0].innerHTML === "Contenido")enla = menu[i].children[0].getAttribute("href");
+       }
+
+       lista = dp.parseFromString(doAJAX(enla).response,"text/html").getElementById("content_listContainer");
+    }
     if(lista){
     var lis = lista.children;
         var arrayEnlaces = [] ;
@@ -148,4 +158,3 @@ subxhr1.onreadystatechange = function (){
 }
 subxhr1.send();
 }
-
